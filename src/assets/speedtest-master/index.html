@@ -1,92 +1,70 @@
-
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>WiiFiber Test</title>
-    
-    <style type="text/css">
-        
-        body { font-family: sans-serif; text-align: center; background: #f4f4f4; padding: 20px; }
-        h1 { color: #333; }
-        #testWrapper { margin-top: 20px; }
-        .hidden { display: none; }
-        .visible { display: block; }
-        #startStopBtn { padding: 15px 30px; font-size: 18px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 5px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiiFiber | Test de Velocidad</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; display: flex; flex-direction: column; align-items: center; padding: 40px; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        h1 { color: #007bff; margin-bottom: 20px; }
+        .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 25px 0; }
+        .metric { background: #f8f9fa; padding: 15px; border-radius: 10px; border-bottom: 3px solid #007bff; }
+        .metric span { display: block; font-size: 1.2em; font-weight: bold; color: #333; }
+        #startStopBtn { padding: 15px 30px; font-size: 16px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 50px; transition: 0.3s; width: 100%; }
+        #startStopBtn:hover { background: #0056b3; }
+        #startStopBtn:disabled { background: #ccc; }
     </style>
 </head>
-
 <body>
-    <h1>WiiFiber Test de Velocidad</h1>
-    
-    <div id="loading" class="visible">
-        <p id="message">Cargando motor de prueba...</p>
-    </div>
 
+<div class="card">
+    <h1>WiiFiber</h1>
+    <div id="loading"><p>Preparando red...</p></div>
     <div id="testWrapper" class="hidden">
         <button id="startStopBtn" onclick="startStop()">Iniciar Prueba</button>
-        <div id="test">
-            <p>Ping: <span id="pingText">--</span> ms</p>
-            <p>Download: <span id="dlText">--</span> Mbps</p>
-            <p>Upload: <span id="ulText">--</span> Mbps</p>
+        <div class="result-grid">
+            <div class="metric">Ping<span id="pingText">--</span></div>
+            <div class="metric">Jitter<span id="jitterText">--</span></div>
+        </div>
+        <div class="result-grid">
+            <div class="metric">Download<span id="dlText">--</span></div>
+            <div class="metric">Upload<span id="ulText">--</span></div>
         </div>
     </div>
+</div>
 
-   <script type="text/javascript" src="speedtest.js"></script>
-<script type="text/javascript">
-    // Configuramos el servidor directamente en la instancia
- var s = new Speedtest({
-    server: "https://speedtest.librespeed.org/", // Servidor estable
-    // Forzamos el uso de una sola ruta directa
-    forceIE11Workaround: true
-});
+<script src="speedtest.js"></script>
+<script>
+    var s = new Speedtest({
+        // Servidores de LibreSpeed en la región (Miami/Latam)
+        server: "https://speedtest-mia1.librespeed.org/", 
+        xhr_ignoreErrors: 2 
+    });
 
-s.onend = function(aborted) {
-    console.log("Prueba finalizada/abortada");
-    
-    // FORZAR limpieza de cualquier intervalo remanente
-    if (typeof interval !== 'undefined') clearInterval(interval);
-    
-    // Resetear el botón
-    document.getElementById('startStopBtn').disabled = false;
-    document.getElementById('startStopBtn').innerText = "Reiniciar Prueba";
-};
+    window.onload = () => {
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('testWrapper').classList.remove('hidden');
+    };
 
-// Modifica tu 'onupdate' para capturar valores extremos
-s.onupdate = function(data) {
-    // Si la velocidad es una locura, ignoramos el valor
-    const dl = parseFloat(data.dlStatus) > 10000 ? "0.00" : data.dlStatus;
-    const ul = parseFloat(data.ulStatus) > 10000 ? "0.00" : data.ulStatus;
-    
-    document.getElementById('pingText').textContent = data.pingStatus;
-    document.getElementById('dlText').textContent = dl;
-    document.getElementById('ulText').textContent = ul;
-};
+    s.onupdate = (data) => {
+        document.getElementById('pingText').textContent = data.pingStatus + " ms";
+        document.getElementById('jitterText').textContent = data.jitterStatus + " ms";
+        document.getElementById('dlText').textContent = data.dlStatus + " Mbps";
+        document.getElementById('ulText').textContent = data.ulStatus + " Mbps";
+    };
 
-    // Esta función se ejecuta apenas carga el script
-    window.onload = function() {
-        console.log("Motor inicializado con servidor directo.");
-        document.getElementById('loading').className = 'hidden';
-        document.getElementById('testWrapper').className = 'visible';
+    s.onend = () => {
+        document.getElementById('startStopBtn').disabled = false;
+        document.getElementById('startStopBtn').innerText = "Reiniciar Prueba";
     };
 
     function startStop() {
-    var btn = document.getElementById('startStopBtn');
-    
-    // Si el motor ya está corriendo (testState > 0), no hacer nada o abortar
-    if (s.getState() > 0) {
-        console.warn("La prueba ya está en curso.");
-        return;
+        if (s.getState() > 0) return;
+        document.getElementById('startStopBtn').disabled = true;
+        document.getElementById('startStopBtn').innerText = "Midiendo...";
+        s.start();
     }
-
-    console.log("Iniciando prueba...");
-    btn.disabled = true; // Desactivar botón
-    btn.innerText = "Probando...";
-    
-    s.start();
-}
 </script>
 </body>
 </html>
