@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>WiiFiber Test</title>
+    
+    <style type="text/css">
+        
+        body { font-family: sans-serif; text-align: center; background: #f4f4f4; padding: 20px; }
+        h1 { color: #333; }
+        #testWrapper { margin-top: 20px; }
+        .hidden { display: none; }
+        .visible { display: block; }
+        #startStopBtn { padding: 15px 30px; font-size: 18px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 5px; }
+    </style>
+</head>
+
+<body>
+    <h1>WiiFiber Test de Velocidad</h1>
+    
+    <div id="loading" class="visible">
+        <p id="message">Cargando motor de prueba...</p>
+    </div>
+
+    <div id="testWrapper" class="hidden">
+        <button id="startStopBtn" onclick="startStop()">Iniciar Prueba</button>
+        <div id="test">
+            <p>Ping: <span id="pingText">--</span> ms</p>
+            <p>Download: <span id="dlText">--</span> Mbps</p>
+            <p>Upload: <span id="ulText">--</span> Mbps</p>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="speedtest.js"></script>
+   <script type="text/javascript" src="speedtest.js"></script>
+<script type="text/javascript">
+    var SPEEDTEST_SERVERS = [{
+        name: "LibreSpeed Test",
+        server: "https://speedtest.librespeed.org/", 
+        dlURL: "garbage.php",
+        ulURL: "empty.php",
+        pingURL: "empty.php",
+        getIpURL: "getIP.php"
+    }];
+
+    var s = new Speedtest();
+    s.addTestPoints(SPEEDTEST_SERVERS);
+
+    function initServers() {
+        console.log("Seleccionando servidor...");
+        s.selectServer(function(server) {
+            if (server != null) {
+                document.getElementById('loading').className = 'hidden';
+                document.getElementById('testWrapper').className = 'visible';
+                console.log("Servidor seleccionado con éxito:", server.name);
+            } else {
+                document.getElementById('message').innerHTML = "Error: No se pudo conectar al servidor.";
+            }
+        });
+    }
+
+    function startStop() {
+        // Quitamos la lógica de getSelectedServer y confiamos en el estado interno
+        console.log("Iniciando...");
+        s.start();
+    }
+
+    window.onload = function() {
+        initServers();
+    };
+</script>
+</body>
+</html>

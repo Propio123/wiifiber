@@ -1,0 +1,8 @@
+#speedtest-container {
+  color: white;
+  min-height: 200px;
+}
+#startBtn {
+  margin: 20px auto;
+  display: inline-block;
+}

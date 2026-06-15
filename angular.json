@@ -19,15 +19,18 @@
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
+           "assets": [
+  "src/favicon.ico",
+  {
+    "glob": "**/*",
+    "input": "src/assets",
+    "output": "assets"
+  }
+],
             "styles": [
               "src/styles.css"
             ],
+            
             "server": "src/main.server.ts",
             "outputMode": "server",
             "security": {
@@ -36,6 +39,7 @@
             "ssr": {
               "entry": "src/server.ts"
             }
+            
           },
           "configurations": {
             "production": {

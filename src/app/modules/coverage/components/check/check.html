@@ -1,0 +1,22 @@
+<section class="py-20 bg-black">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h2 class="text-4xl font-bold mb-2">Verifica tu cobertura en <span class="text-[#4FC3F7]">Imbabura</span></h2>
+    <p class="text-gray-500 mb-8">Escribe tu barrio o sector para consultar disponibilidad.</p>
+    
+    <div class="bg-[#111] p-8 rounded-3xl border border-gray-800 shadow-2xl">
+      <div class="flex flex-col md:flex-row gap-4">
+        <input [(ngModel)]="location" type="text" placeholder="Ej: Caranqui, Alpachaca..."
+               class="flex-1 bg-black border border-gray-700 p-4 rounded-xl text-white outline-none focus:border-[#4FC3F7]">
+        
+        <button (click)="onVerify()" class="bg-[#4FC3F7] text-black font-black px-8 py-4 rounded-xl hover:bg-white transition-all">
+          CONSULTAR
+        </button>
+      </div>
+
+      <div *ngIf="result" [class.text-green-500]="result.status" [class.text-orange-500]="!result.status" 
+           class="mt-6 font-bold text-lg animate-fade-in">
+        {{ result.message }}
+      </div>
+    </div>
+  </div>
+</section>
