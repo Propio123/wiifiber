@@ -34,43 +34,59 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="speedtest.js"></script>
    <script type="text/javascript" src="speedtest.js"></script>
 <script type="text/javascript">
-    var SPEEDTEST_SERVERS = [{
-        name: "LibreSpeed Test",
-        server: "https://speedtest.librespeed.org/", 
-        dlURL: "garbage.php",
-        ulURL: "empty.php",
-        pingURL: "empty.php",
-        getIpURL: "getIP.php"
-    }];
+    // Configuramos el servidor directamente en la instancia
+ var s = new Speedtest({
+    server: "https://speedtest.librespeed.org/", // Servidor estable
+    // Forzamos el uso de una sola ruta directa
+    forceIE11Workaround: true
+});
 
-    var s = new Speedtest();
-    s.addTestPoints(SPEEDTEST_SERVERS);
+s.onend = function(aborted) {
+    console.log("Prueba finalizada/abortada");
+    
+    // FORZAR limpieza de cualquier intervalo remanente
+    if (typeof interval !== 'undefined') clearInterval(interval);
+    
+    // Resetear el botón
+    document.getElementById('startStopBtn').disabled = false;
+    document.getElementById('startStopBtn').innerText = "Reiniciar Prueba";
+};
 
-    function initServers() {
-        console.log("Seleccionando servidor...");
-        s.selectServer(function(server) {
-            if (server != null) {
-                document.getElementById('loading').className = 'hidden';
-                document.getElementById('testWrapper').className = 'visible';
-                console.log("Servidor seleccionado con éxito:", server.name);
-            } else {
-                document.getElementById('message').innerHTML = "Error: No se pudo conectar al servidor.";
-            }
-        });
-    }
+// Modifica tu 'onupdate' para capturar valores extremos
+s.onupdate = function(data) {
+    // Si la velocidad es una locura, ignoramos el valor
+    const dl = parseFloat(data.dlStatus) > 10000 ? "0.00" : data.dlStatus;
+    const ul = parseFloat(data.ulStatus) > 10000 ? "0.00" : data.ulStatus;
+    
+    document.getElementById('pingText').textContent = data.pingStatus;
+    document.getElementById('dlText').textContent = dl;
+    document.getElementById('ulText').textContent = ul;
+};
+
+    // Esta función se ejecuta apenas carga el script
+    window.onload = function() {
+        console.log("Motor inicializado con servidor directo.");
+        document.getElementById('loading').className = 'hidden';
+        document.getElementById('testWrapper').className = 'visible';
+    };
 
     function startStop() {
-        // Quitamos la lógica de getSelectedServer y confiamos en el estado interno
-        console.log("Iniciando...");
-        s.start();
+    var btn = document.getElementById('startStopBtn');
+    
+    // Si el motor ya está corriendo (testState > 0), no hacer nada o abortar
+    if (s.getState() > 0) {
+        console.warn("La prueba ya está en curso.");
+        return;
     }
 
-    window.onload = function() {
-        initServers();
-    };
+    console.log("Iniciando prueba...");
+    btn.disabled = true; // Desactivar botón
+    btn.innerText = "Probando...";
+    
+    s.start();
+}
 </script>
 </body>
 </html>
