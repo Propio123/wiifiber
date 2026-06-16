@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ContactService } from '../../../../core/services/contact';
 
 @Component({
   selector: 'app-plans',
@@ -6,4 +7,10 @@ import { Component } from '@angular/core';
   templateUrl: './plans.html',
   styleUrl: './plans.css',
 })
-export class Plans {}
+export class Plans {
+   constructor(private contactService: ContactService) {}
+
+  onContact(plan: string) {
+    this.contactService.sendWhatsApp(plan);
+  }
+}

@@ -1,10 +1,33 @@
-<nav class="p-6 bg-black border-b border-gray-800">
+<nav class="sticky top-0 z-50 p-6 bg-black border-b border-gray-800">
   <div class="max-w-7xl mx-auto flex justify-between items-center">
     <div class="text-2xl font-bold text-[#4FC3F7]">WiiFiber</div>
-    <div class="space-x-6 text-sm uppercase tracking-widest hidden md:block">
-      <a routerLink="/" class="hover:text-[#4FC3F7] transition-colors">Inicio</a>
-      <a routerLink="/planes" class="hover:text-[#4FC3F7] transition-colors">Planes</a>
-      <a href="#contacto" class="text-black bg-[#4FC3F7] px-4 py-2 rounded-full font-bold">Soporte</a>
+
+    <div class="space-x-6 text-sm uppercase tracking-widest hidden md:flex items-center text-white">
+      <button (click)="scrollTo('inicio')" class="hover:text-[#4FC3F7]">Inicio</button>
+      <button (click)="scrollTo('planes')" class="hover:text-[#4FC3F7]">Planes</button>
+      <button (click)="scrollTo('check')" class="hover:text-[#4FC3F7]">Cobertura</button>
+      <button (click)="scrollTo('medidor')" class="hover:text-[#4FC3F7]">Medidor</button>
+      <a routerLink="/report" 
+   (click)="isMenuOpen = false" 
+   class="text-black bg-[#4FC3F7] px-5 py-2 rounded-full font-bold hover:bg-white transition-all">
+   Soporte
+</a>
     </div>
+
+    <div class="md:hidden text-[#4FC3F7] cursor-pointer" (click)="toggleMenu()">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+    </div>
+  </div>
+
+  <div id="mobileMenu" [class.hidden]="!isMenuOpen" class="md:hidden bg-black mt-4 flex flex-col space-y-4 text-center py-4 uppercase text-white">
+      <button (click)="scrollTo('inicio')">Inicio</button>
+      <button (click)="scrollTo('planes')">Planes</button>
+      <button (click)="scrollTo('check')">Cobertura</button>
+      <button (click)="scrollTo('medidor')">Medidor</button>
+      <a routerLink="/report" 
+   (click)="toggleMenu()" 
+   class="text-black bg-[#4FC3F7] px-5 py-2 rounded-full font-bold hover:bg-white transition-all">
+   Soporte
+</a>
   </div>
 </nav>

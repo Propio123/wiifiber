@@ -1,0 +1,76 @@
+/* Contenedor principal que centra todo en la pantalla */
+.wiifiber-report-component {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #000; /* Fondo negro */
+    color: white;
+}
+
+/* Títulos */
+.report-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #4FC3F7;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.report-subtitle {
+    color: #9ca3af;
+    margin-bottom: 30px;
+    text-align: center;
+    max-width: 500px;
+}
+
+/* Estructura del formulario */
+#supportForm {
+    width: 100%;
+    max-width: 450px; /* Ancho ideal para web y móvil */
+    background: #111;
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Inputs y Textarea */
+input, textarea {
+    width: 100%;
+    padding: 15px;
+    background: #000;
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: white;
+    box-sizing: border-box; /* Importante para que el padding no rompa el ancho */
+    transition: border 0.3s;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #4FC3F7;
+}
+
+/* Botón estilo WiiFiber */
+.btn-report {
+    width: 100%;
+    padding: 15px;
+    background-color: #4FC3F7;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.btn-report:hover {
+    background-color: #fff;
+    transform: scale(1.02);
+}

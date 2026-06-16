@@ -1,1 +1,36 @@
-<p>report works!</p>
+<div class="wiifiber-report-component">
+    <h2 class="report-title">Reporte de Incidencia Técnica</h2>
+    <p class="report-subtitle">Tus datos técnicos se enviarán automáticamente para una atención más rápida.</p>
+
+    <form id="supportForm" action="https://formspree.io/f/TU_CODIGO_AQUI" method="POST">
+        <div class="form-group">
+            <input type="text" name="name" placeholder="Nombre completo" required>
+        </div>
+        <div class="form-group">
+            <input type="email" name="email" placeholder="Correo electrónico" required>
+        </div>
+        <div class="form-group">
+            <textarea name="message" placeholder="Describe tu problema técnico..." rows="4" required></textarea>
+        </div>
+
+        <input type="hidden" name="ping_data" id="hiddenPing">
+        <input type="hidden" name="download_data" id="hiddenDl">
+
+        <button type="submit" class="btn-report">Enviar Ticket</button>
+    </form>
+</div>
+
+<script>
+    // Lógica para capturar el estado actual del medidor (si existe en la misma página)
+    document.getElementById('supportForm').addEventListener('submit', function() {
+        const pingEl = document.getElementById('pingText');
+        const dlEl = document.getElementById('dlText');
+
+        // Solo captura si los elementos existen
+        if(pingEl && dlEl) {
+            document.getElementById('hiddenPing').value = pingEl.textContent;
+            document.getElementById('hiddenDl').value = dlEl.textContent;
+        }
+    });
+</script>
+

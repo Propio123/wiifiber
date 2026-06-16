@@ -1,0 +1,7 @@
+{
+  "/backend": {
+    "target": "https://speedtest.librespeed.org",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

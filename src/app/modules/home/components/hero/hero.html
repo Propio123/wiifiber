@@ -1,25 +1,30 @@
-<section class="relative bg-black text-white py-20 px-6 overflow-hidden">
-  <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-900/20 blur-[100px] rounded-full"></div>
+<section class="relative min-h-[80vh] flex items-center pt-20 overflow-hidden bg-black">
+  <div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#4FC3F7]/10 blur-[120px] rounded-full"></div>
+  <div class="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-[#1a237e]/20 blur-[100px] rounded-full"></div>
 
-  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center relative z-10">
-    <div class="md:w-1/2 space-y-6">
-      <h1 class="text-5xl md:text-7xl font-bold leading-tight">
-        Ven y forma parte de la familia <span class="text-[#4FC3F7]">WiiFiber</span>
+  <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+    <div class="space-y-8">
+      <div class="inline-block px-4 py-1 rounded-full border border-[#4FC3F7]/30 bg-[#4FC3F7]/5 text-[#4FC3F7] text-sm font-bold tracking-widest uppercase">
+        🚀 Promoción por tiempo limitado
+      </div>
+      <h1 class="text-6xl md:text-8xl font-black leading-none tracking-tighter">
+        Ven y forma parte de la <span class="text-[#4FC3F7]">Familia WiiFiber</span>
       </h1>
-      <p class="text-xl text-gray-300">Internet de calidad. Precios justos. Hazte cliente y disfruta de beneficios exclusivos.</p>
-      
-      <div class="bg-gradient-to-r from-[#1a237e] to-[#4FC3F7] p-[2px] rounded-lg inline-block">
-        <div class="bg-black px-6 py-3 rounded-md">
-          <p class="font-bold text-lg text-white">PROMO: Instalación SIN COSTO + 1 MES GRATIS</p>
-        </div>
+      <p class="text-xl text-gray-400 max-w-lg">
+        Internet de calidad, precios justos. <span class="text-white font-semibold">Instalación SIN COSTO + 1 MES GRATIS</span> por regreso a clases.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <button (click)="abrirWhatsApp()" 
+        class="bg-[#4FC3F7] hover:bg-[#3bb0e2] text-black font-black py-5 px-10 rounded-2xl transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(79,195,247,0.4)]">
+  AGENDA TU INSTALACIÓN HOY
+</button>
       </div>
-
-      <div>
-        <a [href]="whatsappLink" target="_blank" 
-           class="bg-[#4FC3F7] hover:bg-cyan-400 text-black font-bold py-4 px-8 rounded-full transition-all text-lg shadow-[0_0_20px_rgba(79,195,247,0.4)]">
-          ¡Agenda tu instalación hoy!
-        </a>
-      </div>
+    </div>
+    
+    <div class="relative">
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
+      <img src="https://scontent.fuio10-2.fna.fbcdn.net/v/t39.30808-6/469009496_122173564130116482_7732727645631251013_n.jpg?stp=dst-jpg_tt6&cstp=mx1080x723&ctp=s1080x723&_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeELIRRyqJk1Vv-dwHjf0idlde4o7Hz9qaZ17ijsfP2pphW7Xxi-XS_7T2b6YS5Dr_xFzBh-tLdGuRcBWDVOTDsN&_nc_ohc=TQWzXC5PnqoQ7kNvwEPriqB&_nc_oc=AdoQGrq76s7mjBsA1WFtbhL2QK20L2_yf9Q8SH7s4lf_aTaOv0gkGchwhxAWXyCnHWQ&_nc_zt=23&_nc_ht=scontent.fuio10-2.fna&_nc_gid=6B8br7iKgZZbPDDchLTDXg&_nc_ss=7b2a8&oh=00_Af8el2usSI1xIBns3XAT_XlobPyWrDB8GrW1s5Fx3wpiAA&oe=6A32C1BC" 
+           alt="WiiFiber Home" class="rounded-3xl shadow-2xl border border-gray-800 transform rotate-2">
     </div>
   </div>
 </section>
