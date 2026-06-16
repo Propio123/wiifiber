@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,9 +8,17 @@ import { Router } from '@angular/router';
   styleUrl: './footer.css',
 })
 export class Footer {
+  @ViewChild('privacyModal') privacyModal!: ElementRef<HTMLDialogElement>;
   isMenuOpen = false;
 
   constructor(private router: Router) {}
+  openModal() {
+    this.privacyModal.nativeElement.showModal();
+  }
+
+  closeModal() {
+    this.privacyModal.nativeElement.close();
+  }
 
   toggleMenu() { 
     this.isMenuOpen = !this.isMenuOpen; 

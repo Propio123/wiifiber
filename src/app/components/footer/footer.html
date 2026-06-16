@@ -4,27 +4,27 @@
     <div>
       <h3 class="text-white font-bold mb-4">Navegación</h3>
       <ul class="space-y-2 text-sm">
-        <li><button (click)="scrollTo('inicio')" class="hover:text-[#4FC3F7]">Inicio</button></li>
-        <li><button (click)="scrollTo('planes')" class="hover:text-[#4FC3F7]">Planes</button></li>
-        <li><button (click)="scrollTo('medidor')" class="hover:text-[#4FC3F7]">Medidor</button></li>
-        <li><a routerLink="/report" class="hover:text-[#4FC3F7]">Soporte</a></li>
+        <li><button (click)="scrollTo('inicio')" class="hover:text-[#4FC3F7] transition-colors">Inicio</button></li>
+        <li><button (click)="scrollTo('planes')" class="hover:text-[#4FC3F7] transition-colors">Planes</button></li>
+        <li><button (click)="scrollTo('medidor')" class="hover:text-[#4FC3F7] transition-colors">Medidor</button></li>
+        <li><a routerLink="/report" class="hover:text-[#4FC3F7] transition-colors">Soporte</a></li>
       </ul>
     </div>
 
     <div>
       <h3 class="text-white font-bold mb-4">Regulación</h3>
       <ul class="space-y-2 text-sm">
-        <li><a href="https://www.arcotel.gob.ec" target="_blank" class="hover:text-[#4FC3F7]">ARCOTEL</a></li>
-        <li><a href="https://spdp.gob.ec/" target="_blank" class="hover:text-[#4FC3F7]">Superintendencia de Protección de Datos</a></li>
-        <li><a href="https://www.supercias.gob.ec/portalscvs/index.htm" target="_blank" class="hover:text-[#4FC3F7]">Superintendencia de Compañías</a></li>
+        <li><a href="https://www.arcotel.gob.ec" target="_blank" class="hover:text-[#4FC3F7] transition-colors">ARCOTEL</a></li>
+        <li><a href="https://spdp.gob.ec/" target="_blank" class="hover:text-[#4FC3F7] transition-colors">Protección de Datos</a></li>
+              <li><a href="https://www.supercias.gob.ec/portalscvs/index.htm" target="_blank" class="hover:text-[#4FC3F7] transition-colors">Supeintendecia de Compañías</a></li>
       </ul>
     </div>
 
     <div>
       <h3 class="text-white font-bold mb-4">Legal</h3>
       <ul class="space-y-2 text-sm">
-        <li><a routerLink="/privacidad" class="hover:text-[#4FC3F7]">Política de Privacidad</a></li>
-        <li><a routerLink="/terminos" class="hover:text-[#4FC3F7]">Términos y Condiciones</a></li>
+        <li><button (click)="privacyModal.showModal()" class="hover:text-[#4FC3F7] transition-colors">Política de Privacidad</button></li>
+        <li><button (click)="termsModal.showModal()" class="hover:text-[#4FC3F7] transition-colors">Términos y Condiciones</button></li>
       </ul>
     </div>
   </div>
@@ -35,3 +35,65 @@
     <p class="text-xs mt-2">Diseñado por <span class="text-[#4FC3F7]">REDEX_TECH</span></p>
   </div>
 </footer>
+
+<dialog #privacyModal class="p-0 rounded-xl max-w-2xl w-[90%] backdrop:bg-black/80">
+  <div class="p-8 bg-black border border-[#4FC3F7] text-white">
+    <h2 class="text-2xl font-bold text-[#4FC3F7] mb-4">Política de Uso de Datos</h2>
+    <div class="h-96 overflow-y-auto pr-4 text-sm text-gray-300">
+        <p>POLÍTICA DE PRIVACIDAD DE WIIFIBER S.A.
+En WIFIBER S.A. (en adelante, "WIFIBER"), nos tomamos muy en serio la privacidad de nuestros clientes. Esta Política explica cómo recopilamos, usamos, protegemos y compartimos su información personal, cumpliendo con la Ley Orgánica de Protección de Datos Personales (LOPDP) de Ecuador.
+1. Responsable del Tratamiento
+•	Razón Social: WIFIBER S.A.
+•	RUC: 1091798835001
+•	Dirección: Ibarra, calles Bolívar 13-12 y Teodoro Gómez
+•	Correo electrónico del Delegado de Protección de Datos (DPD): protecciondedatos@wifiber.com.ec
+2. Datos que Recopilamos
+Para prestar el servicio de internet y gestión de red, tratamos:
+•	Datos de Registro: Nombre, número de cédula/RUC, dirección domiciliaria para instalación y contacto telefónico/email.
+•	Datos de Red (ISP): Dirección IP (estática o dinámica), registros de tiempo de conexión, volúmenes de datos consumidos y metadatos de tráfico necesarios para la gestión técnica mediante plataformas como Wisphub.
+•	Datos de Facturación: Historial de pagos, datos de tarjetas o cuentas bancarias gestionados a través de nuestros sistemas de facturación de terceros.
+3. Finalidades y Bases Legales
+Tratamos sus datos basándonos en las siguientes condiciones legales:
+1.	Ejecución del Contrato: Para instalar el servicio, brindar soporte técnico y gestionar la cobranza.
+2.	Obligación Legal: Para conservar registros de tráfico por el periodo exigido por la Ley de Comercio Electrónico y regulaciones de ARCOTEL (fines de auxilio a la justicia).
+3.	Interés Legítimo: Para garantizar la ciberseguridad de nuestra infraestructura y prevenir fraudes en la red.
+4.	Consentimiento: Únicamente si usted lo autoriza, para envío de ofertas comerciales o promociones.
+4. Uso de Plataformas de Terceros (Encargados)
+Para una gestión eficiente, WIIFIBER utiliza proveedores especializados:
+•	Gestión de Red: Utilizamos Wisphub para el aprovisionamiento y control de tráfico.
+•	Sistemas Contables: Los datos de facturación se procesan en sistemas externos que cumplen con estándares de seguridad y cifrado. WIIFIBER ha firmado acuerdos de confidencialidad con estos proveedores para asegurar que sus datos no sean usados para fines distintos a los aquí descritos.
+5. Transferencias Internacionales
+En caso de que nuestros proveedores de software utilicen servidores fuera de Ecuador (ej. nubes de AWS o Google), WIIFIBER asegura que dichos proveedores cumplan con niveles adecuados de protección de datos según los estándares internacionales aceptados por la autoridad ecuatoriana.
+6. Conservación de los Datos
+•	Datos de contrato y facturación: Se conservarán por 7 años (según el Código Tributario).
+•	Registros de tráfico (Logs): Se conservarán por el plazo legal de 7 años para requerimientos judiciales.
+•	Datos de marketing: Se conservarán hasta que usted revoque su consentimiento.
+7. Sus Derechos (ARCO+)
+Usted tiene derecho a:
+•	Acceder a sus datos personales.
+•	Rectificar información inexacta.
+•	Eliminar sus datos (cuando no exista una obligación legal de mantenerlos).
+•	Oponerse al uso de sus datos para fines comerciales.
+•	Portabilidad de sus datos técnicos.
+Para ejercer estos derechos, descargue nuestro Formulario de Solicitud en la web y envíelo a protecciondedatos@wifiber.com.ec.
+8. Seguridad de la Información
+WIFIBER implementa medidas técnicas de vanguardia, incluyendo cifrado de datos, protocolos de seguridad en la nube y acceso restringido basado en roles para sus empleados, minimizando el riesgo de filtraciones.
+9. Cambios en la Política
+WIIFIBER se reserva el derecho de actualizar esta política. Cualquier cambio sustancial será notificado a través de nuestra página web o por correo electrónico.
+. En Wiifiber, protegemos tu privacidad conforme a la Ley Orgánica de Protección de Datos Personales del Ecuador</p>
+        </div>
+    <button (click)="privacyModal.close()" class="mt-6 w-full py-2 bg-[#4FC3F7] text-black font-bold rounded-lg hover:bg-white">Cerrar</button>
+  </div>
+</dialog>
+
+<dialog #termsModal class="p-0 rounded-xl max-w-2xl w-[90%] backdrop:bg-black/80">
+  <div class="p-8 bg-black border border-[#4FC3F7] text-white">
+    <h2 class="text-2xl font-bold text-[#4FC3F7] mb-4">Términos y Condiciones</h2>
+    <div class="h-96 overflow-y-auto pr-4 text-sm text-gray-300 space-y-3">
+        <p>1. Servicio sujeto a factibilidad técnica.</p>
+        <p>2. Pago puntual requerido en los primeros 5 días del mes.</p>
+        <p>3. El uso del servicio implica la aceptación de las normativas de ARCOTEL.</p>
+        </div>
+    <button (click)="termsModal.close()" class="mt-6 w-full py-2 bg-[#4FC3F7] text-black font-bold rounded-lg hover:bg-white">Cerrar</button>
+  </div>
+</dialog>
