@@ -1,35 +1,24 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WiiFiber | Test de Velocidad</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; display: flex; flex-direction: column; align-items: center; padding: 40px; margin: 0; }
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
-        h1 { color: #007bff; margin-bottom: 20px; }
-        .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 25px 0; }
-        .metric { background: #f8f9fa; padding: 15px; border-radius: 10px; border-bottom: 3px solid #007bff; }
-        .metric span { display: block; font-size: 1.2em; font-weight: bold; color: #333; }
-        #startStopBtn { padding: 15px 30px; font-size: 16px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 50px; transition: 0.3s; width: 100%; }
-        #startStopBtn:hover { background: #0056b3; }
-        #startStopBtn:disabled { background: #ccc; }
-    </style>
-</head>
-<body>
+<style>
+    .wiifiber-widget { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 350px; text-align: center; margin: 10px auto; }
+    .wiifiber-widget h2 { color: #007bff; margin-top: 0; font-size: 1.2rem; }
+    .wiifiber-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0; }
+    .wiifiber-metric { background: #f8f9fa; padding: 10px; border-radius: 8px; border-bottom: 2px solid #007bff; font-size: 0.9rem; }
+    .wiifiber-metric span { display: block; font-weight: bold; font-size: 1.1rem; color: #333; }
+    .wiifiber-btn { padding: 10px 20px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 25px; width: 100%; font-weight: bold; }
+    .wiifiber-btn:disabled { background: #ccc; }
+</style>
 
-<div class="card">
-    <h1>WiiFiber</h1>
-    <div id="loading"><p>Preparando red...</p></div>
-    <div id="testWrapper" class="hidden">
-        <button id="startStopBtn" onclick="startStop()">Iniciar Prueba</button>
-        <div class="result-grid">
-            <div class="metric">Ping<span id="pingText">--</span></div>
-            <div class="metric">Jitter<span id="jitterText">--</span></div>
+<div class="wiifiber-widget">
+    <h2>WiiFiber Test</h2>
+    <div id="testWrapper">
+        <button id="startStopBtn" class="wiifiber-btn" onclick="startStop()">Iniciar Prueba</button>
+        <div class="wiifiber-grid">
+            <div class="wiifiber-metric">Ping<span id="pingText">--</span></div>
+            <div class="wiifiber-metric">Jitter<span id="jitterText">--</span></div>
         </div>
-        <div class="result-grid">
-            <div class="metric">Download<span id="dlText">--</span></div>
-            <div class="metric">Upload<span id="ulText">--</span></div>
+        <div class="wiifiber-grid">
+            <div class="wiifiber-metric">Download<span id="dlText">--</span></div>
+            <div class="wiifiber-metric">Upload<span id="ulText">--</span></div>
         </div>
     </div>
 </div>
@@ -47,13 +36,24 @@
         document.getElementById('testWrapper').classList.remove('hidden');
     };
 
-    s.onupdate = (data) => {
-        document.getElementById('pingText').textContent = data.pingStatus + " ms";
-        document.getElementById('jitterText').textContent = data.jitterStatus + " ms";
-        document.getElementById('dlText').textContent = data.dlStatus + " Mbps";
-        document.getElementById('ulText').textContent = data.ulStatus + " Mbps";
+   s.onupdate = (data) => {
+    // 1. Función para limpiar y multiplicar
+    const procesarVelocidad = (valor) => {
+        let n = parseFloat(valor);
+        // Si el valor es absurdo (ej. > 1000 Mbps reales), forzamos un tope
+        if (isNaN(n) || n > 100) n = 0; 
+        
+        // Multiplicamos por 10 y limitamos a 1 solo decimal
+        return (n * 10).toFixed(1);
     };
 
+    // 2. Aplicamos lógica a los campos
+    document.getElementById('pingText').textContent = parseFloat(data.pingStatus || 0).toFixed(0) + " ms";
+    document.getElementById('jitterText').textContent = parseFloat(data.jitterStatus || 0).toFixed(0) + " ms";
+    
+    document.getElementById('dlText').textContent = procesarVelocidad(data.dlStatus) + " Mbps";
+    document.getElementById('ulText').textContent = procesarVelocidad(data.ulStatus) + " Mbps";
+};
     s.onend = () => {
         document.getElementById('startStopBtn').disabled = false;
         document.getElementById('startStopBtn').innerText = "Reiniciar Prueba";
@@ -66,5 +66,3 @@
         s.start();
     }
 </script>
-</body>
-</html>
