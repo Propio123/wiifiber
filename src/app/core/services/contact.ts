@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ContactService {
-  private readonly phoneNumber = '593969743150'; // Reemplaza con tu número real
+  private readonly phoneNumber = '593980372883'; // Reemplaza con tu número real
 
   sendWhatsApp(planName: string) {
     const message = `¡Hola WiiFiber! Me interesa el plan *${planName}*. Quisiera agendar mi instalación y aprovechar la promo de regreso a clases.`;

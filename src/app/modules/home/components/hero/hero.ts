@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './hero.html'
 })
 export class Hero {
-  phoneNumber = '593969743150';
+  phoneNumber = '593980372883';
   message = '¡Hola WiiFiber! Quiero agendar mi instalación y aprovechar la promo de regreso a clases.';
    
   get whatsappLink(): string {
