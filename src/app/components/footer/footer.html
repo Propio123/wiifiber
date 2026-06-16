@@ -1,7 +1,37 @@
-<footer class="py-12 border-t border-gray-800 bg-black text-center text-gray-500">
-  <div class="max-w-7xl mx-auto">
+<footer class="py-12 border-t border-gray-800 bg-black text-gray-400">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 text-center md:text-left">
+    
+    <div>
+      <h3 class="text-white font-bold mb-4">Navegación</h3>
+      <ul class="space-y-2 text-sm">
+        <li><button (click)="scrollTo('inicio')" class="hover:text-[#4FC3F7]">Inicio</button></li>
+        <li><button (click)="scrollTo('planes')" class="hover:text-[#4FC3F7]">Planes</button></li>
+        <li><button (click)="scrollTo('medidor')" class="hover:text-[#4FC3F7]">Medidor</button></li>
+        <li><a routerLink="/report" class="hover:text-[#4FC3F7]">Soporte</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-white font-bold mb-4">Regulación</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="https://www.arcotel.gob.ec" target="_blank" class="hover:text-[#4FC3F7]">ARCOTEL</a></li>
+        <li><a href="https://spdp.gob.ec/" target="_blank" class="hover:text-[#4FC3F7]">Superintendencia de Protección de Datos</a></li>
+        <li><a href="https://www.supercias.gob.ec/portalscvs/index.htm" target="_blank" class="hover:text-[#4FC3F7]">Superintendencia de Compañías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-white font-bold mb-4">Legal</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a routerLink="/privacidad" class="hover:text-[#4FC3F7]">Política de Privacidad</a></li>
+        <li><a routerLink="/terminos" class="hover:text-[#4FC3F7]">Términos y Condiciones</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-gray-900 text-center">
     <p class="font-bold text-white mb-2">Wiifiber - Conectando tu mundo</p>
-    <p class="text-sm">© 2026 Todos los derechos reservados.</p>
-    <p class="text-sm">Design  by REDEX_TECH </p>
+    <p class="text-xs">© 2026 Todos los derechos reservados.</p>
+    <p class="text-xs mt-2">Diseñado por <span class="text-[#4FC3F7]">REDEX_TECH</span></p>
   </div>
 </footer>
