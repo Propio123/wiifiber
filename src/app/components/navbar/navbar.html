@@ -4,7 +4,7 @@
 
     <div class="space-x-6 text-sm uppercase tracking-widest hidden md:flex items-center text-white">
       <button (click)="scrollTo('inicio')" class="hover:text-[#4FC3F7]">Inicio</button>
-      <button (click)="scrollTo('about')" class="hover:text-[#4FC3F7]">Nosotros</button>
+      <a routerLink="/about" (click)="scrollTo('about text-transform=none' )">Nosotros</a>
       <button (click)="scrollTo('planes')" class="hover:text-[#4FC3F7]">Planes</button>
       <button (click)="scrollTo('check')" class="hover:text-[#4FC3F7]">Cobertura</button>
       <button (click)="scrollTo('medidor')" class="hover:text-[#4FC3F7]">Medidor</button>
@@ -22,7 +22,16 @@
 
   <div id="mobileMenu" [class.hidden]="!isMenuOpen" class="md:hidden bg-black mt-4 flex flex-col space-y-4 text-center py-4 uppercase text-white">
       <button (click)="scrollTo('inicio')">Inicio</button>
-      <button (click)="scrollTo('about')">Nosotros</button>
+      <div [class.hidden]="!isMenuOpen" class="md:hidden bg-black p-4 absolute top-full w-full">
+  <ul class="flex flex-col gap-4">
+    <li>
+      <a routerLink="/about" (click)="closeMenu()" class="hover:text-[#4FC3F7]">Nosotros</a>
+    </li>
+    <li>
+      <button (click)="scrollTo('planes'); closeMenu()" class="hover:text-[#4FC3F7]">Planes</button>
+    </li>
+  </ul>
+</div>
       <button (click)="scrollTo('planes')">Planes</button>
       <button (click)="scrollTo('check')">Cobertura</button>
       <button (click)="scrollTo('medidor')">Medidor</button>

@@ -30,6 +30,9 @@ export class Navbar {
       this.performScroll(elementId);
     }
   }
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
 
   private performScroll(id: string) {
     const element = document.getElementById(id);
