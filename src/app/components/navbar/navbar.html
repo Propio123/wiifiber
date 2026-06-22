@@ -4,6 +4,7 @@
 
     <div class="space-x-6 text-sm uppercase tracking-widest hidden md:flex items-center text-white">
       <button (click)="scrollTo('inicio')" class="hover:text-[#4FC3F7]">Inicio</button>
+      <a routerLink="/about" class="hover:text-[#4FC3F7]">Nosotros</a>
       <button (click)="scrollTo('planes')" class="hover:text-[#4FC3F7]">Planes</button>
       <button (click)="scrollTo('check')" class="hover:text-[#4FC3F7]">Cobertura</button>
       <button (click)="scrollTo('medidor')" class="hover:text-[#4FC3F7]">Medidor</button>
@@ -21,6 +22,7 @@
 
   <div id="mobileMenu" [class.hidden]="!isMenuOpen" class="md:hidden bg-black mt-4 flex flex-col space-y-4 text-center py-4 uppercase text-white">
       <button (click)="scrollTo('inicio')">Inicio</button>
+      <a routerLink="/about" class="hover:text-[#4FC3F7]">Nosotros</a>
       <button (click)="scrollTo('planes')">Planes</button>
       <button (click)="scrollTo('check')">Cobertura</button>
       <button (click)="scrollTo('medidor')">Medidor</button>
