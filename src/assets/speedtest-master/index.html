@@ -1,28 +1,83 @@
 <style>
-    .wiifiber-widget { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 350px; text-align: center; margin: 10px auto; }
-    .wiifiber-widget h2 { color: #007bff; margin-top: 0; font-size: 1.2rem; }
-    .wiifiber-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0; }
-    .wiifiber-metric { background: #f8f9fa; padding: 10px; border-radius: 8px; border-bottom: 2px solid #007bff; font-size: 0.9rem; }
-    .wiifiber-metric span { display: block; font-weight: bold; font-size: 1.1rem; color: #333; }
-    .wiifiber-btn { padding: 10px 20px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 25px; width: 100%; font-weight: bold; }
-    .wiifiber-btn:disabled { background: #ccc; }
+    .wiifiber-widget { 
+    background: linear-gradient(145deg, #0a0a0a, #1a1a1a); 
+    padding: 30px; 
+    border-radius: 24px; 
+    border: 1px solid #333;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 10px rgba(79, 195, 247, 0.1); 
+    width: 100%; 
+    max-width: 500px; 
+    margin: 40px auto; 
+    text-align: center; 
+    color: white;
+}
+
+.wiifiber-widget h2 { 
+    color: #4FC3F7; 
+    font-size: 1.5rem; 
+    letter-spacing: 2px; 
+    text-transform: uppercase; 
+    margin-bottom: 25px; 
+}
+
+.wiifiber-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 15px; 
+    margin: 20px 0; 
+}
+
+.wiifiber-metric { 
+    background: #000; 
+    padding: 20px; 
+    border-radius: 16px; 
+    border: 1px solid #222;
+    transition: transform 0.3s;
+}
+
+.wiifiber-metric:hover { border-color: #4FC3F7; transform: translateY(-5px); }
+
+.wiifiber-metric span { 
+    display: block; 
+    font-size: 1.8rem; 
+    font-family: 'Courier New', monospace; /* Fuente más técnica */
+    color: #4FC3F7; 
+    margin-top: 5px;
+}
+
+.wiifiber-btn { 
+    padding: 18px 40px; 
+    cursor: pointer; 
+    background: transparent; 
+    color: #4FC3F7; 
+    border: 2px solid #4FC3F7; 
+    border-radius: 50px; 
+    width: 100%; 
+    font-weight: 800; 
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition: all 0.3s;
+}
+
+.wiifiber-btn:hover { background: #4FC3F7; color: black; box-shadow: 0 0 20px rgba(79, 195, 247, 0.4); }
+.wiifiber-btn:disabled { border-color: #555; color: #555; cursor: not-allowed; }
 </style>
 
 <div class="wiifiber-widget">
-    <h2>WiiFiber Test</h2>
+    <h2>WiiFiber Speedtest</h2>
     <div id="testWrapper">
         <button id="startStopBtn" class="wiifiber-btn" onclick="startStop()">Iniciar Prueba</button>
+        
         <div class="wiifiber-grid">
-            <div class="wiifiber-metric">Ping<span id="pingText">--</span></div>
-            <div class="wiifiber-metric">Jitter<span id="jitterText">--</span></div>
+            <div class="wiifiber-metric">Ping <span id="pingText">0 ms</span></div>
+            <div class="wiifiber-metric">Jitter <span id="jitterText">0 ms</span></div>
         </div>
         <div class="wiifiber-grid">
-            <div class="wiifiber-metric">Download<span id="dlText">--</span></div>
-            <div class="wiifiber-metric">Upload<span id="ulText">--</span></div>
+            <div class="wiifiber-metric">Descarga <span id="dlText">0 Mbps</span></div>
+            <div class="wiifiber-metric">Carga <span id="ulText">0 Mbps</span></div>
         </div>
     </div>
 </div>
-
 <script src="speedtest.js"></script>
 <script>
     var s = new Speedtest({
